@@ -91,6 +91,42 @@ function HotelDetails() {
             className="w-full h-80 object-cover"
           />
         </div>
+        {/* ✅ Details Highlights Section */}
+<div className="mt-6 grid md:grid-cols-3 gap-4">
+  <div className="bg-white border rounded-2xl p-5 shadow-sm">
+    <p className="text-sm text-gray-500">Check-in / Check-out</p>
+    <p className="mt-1 font-semibold text-gray-900">12:00 PM · 11:00 AM</p>
+    <p className="text-xs text-gray-500 mt-2">
+      Early check-in subject to availability.
+    </p>
+  </div>
+
+  <div className="bg-white border rounded-2xl p-5 shadow-sm">
+    <p className="text-sm text-gray-500">Popular Amenities</p>
+    <div className="mt-2 flex flex-wrap gap-2">
+      {(hotel.amenities || []).slice(0, 4).map((a) => (
+        <span
+          key={a}
+          className="text-xs px-3 py-1 rounded-full bg-gray-100 text-gray-800"
+        >
+          {a}
+        </span>
+      ))}
+    </div>
+    <p className="text-xs text-gray-500 mt-2">
+      More amenities available on request.
+    </p>
+  </div>
+
+  <div className="bg-white border rounded-2xl p-5 shadow-sm">
+    <p className="text-sm text-gray-500">Cancellation</p>
+    <p className="mt-1 font-semibold text-gray-900">Free cancellation</p>
+    <p className="text-xs text-gray-500 mt-2">
+      Cancel up to 24 hours before check-in.
+    </p>
+  </div>
+</div>
+
 
         {/* Details */}
         <div>
