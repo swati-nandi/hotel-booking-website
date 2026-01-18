@@ -30,24 +30,30 @@ function Navbar() {
             <Link to="/hotels" className="hover:text-blue-600">
               Hotels
             </Link>
-            <Link to="/favorites" className="hover:text-blue-600">
-              Wishlist
-            </Link>
-            <Link to="/bookings" className="hover:text-blue-600">
-              My Bookings
-            </Link>
-            <Link to="/profile" className="hover:text-blue-600">
-              Profile
-            </Link>
+
+            {user && (
+              <>
+                <Link to="/favorites" className="hover:text-blue-600">
+                  Wishlist
+                </Link>
+                <Link to="/bookings" className="hover:text-blue-600">
+                  My Bookings
+                </Link>
+                <Link to="/profile" className="hover:text-blue-600">
+                  Profile
+                </Link>
+              </>
+            )}
           </div>
 
-          {/* Desktop Auth */}
+          {/* Desktop Auth Buttons */}
           <div className="hidden md:flex items-center gap-3">
             {user ? (
               <>
                 <span className="text-sm text-gray-600">
                   Hi, <b>{user.username || user.email}</b>
                 </span>
+
                 <button
                   onClick={handleLogout}
                   className="bg-gray-900 text-white px-5 py-2 rounded-lg hover:bg-black transition"
@@ -56,12 +62,21 @@ function Navbar() {
                 </button>
               </>
             ) : (
-              <Link
-                to="/login"
-                className="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition"
-              >
-                Login
-              </Link>
+              <>
+                <Link
+                  to="/login"
+                  className="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition"
+                >
+                  Login
+                </Link>
+
+                <Link
+                  to="/signup"
+                  className="border border-gray-300 text-gray-800 px-5 py-2 rounded-lg hover:bg-gray-100 transition"
+                >
+                  Signup
+                </Link>
+              </>
             )}
           </div>
 
@@ -93,31 +108,36 @@ function Navbar() {
               Hotels
             </Link>
 
-            <Link
-              to="/favorites"
-              className="block hover:text-blue-600"
-              onClick={() => setOpen(false)}
-            >
-              Wishlist
-            </Link>
+            {user && (
+              <>
+                <Link
+                  to="/favorites"
+                  className="block hover:text-blue-600"
+                  onClick={() => setOpen(false)}
+                >
+                  Wishlist
+                </Link>
 
-            <Link
-              to="/bookings"
-              className="block hover:text-blue-600"
-              onClick={() => setOpen(false)}
-            >
-              My Bookings
-            </Link>
+                <Link
+                  to="/bookings"
+                  className="block hover:text-blue-600"
+                  onClick={() => setOpen(false)}
+                >
+                  My Bookings
+                </Link>
 
-            <Link
-              to="/profile"
-              className="block hover:text-blue-600"
-              onClick={() => setOpen(false)}
-            >
-              Profile
-            </Link>
+                <Link
+                  to="/profile"
+                  className="block hover:text-blue-600"
+                  onClick={() => setOpen(false)}
+                >
+                  Profile
+                </Link>
+              </>
+            )}
 
-            <div className="pt-2 border-t">
+            {/* Mobile Auth */}
+            <div className="pt-2 border-t flex gap-3">
               {user ? (
                 <button
                   onClick={handleLogout}
@@ -126,13 +146,23 @@ function Navbar() {
                   Logout
                 </button>
               ) : (
-                <Link
-                  to="/login"
-                  className="block text-center bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition"
-                  onClick={() => setOpen(false)}
-                >
-                  Login
-                </Link>
+                <>
+                  <Link
+                    to="/login"
+                    className="w-1/2 text-center bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition"
+                    onClick={() => setOpen(false)}
+                  >
+                    Login
+                  </Link>
+
+                  <Link
+                    to="/signup"
+                    className="w-1/2 text-center border border-gray-300 text-gray-800 px-5 py-2 rounded-lg hover:bg-gray-100 transition"
+                    onClick={() => setOpen(false)}
+                  >
+                    Signup
+                  </Link>
+                </>
               )}
             </div>
           </div>

@@ -12,12 +12,15 @@ Users can search, filter, view hotel details, add to wishlist, and book hotels w
 ## 📌 Features
 
 ### ✅ Authentication & Session
-- Login system using **JWT-based authentication (DummyJSON)**
+- Login + Signup functionality
+  - **DummyJSON JWT login** (demo credentials)
+  - **Local signup users** stored in localStorage (demo project)
 - Session persistence using **localStorage**
 - Protected routes:
   - My Bookings
   - Profile
   - Wishlist/Favorites
+
 
 ### ✅ Hotels Search & Listings
 - Search hotels by **city / destination**
@@ -71,10 +74,15 @@ Users can search, filter, view hotel details, add to wishlist, and book hotels w
 ---
 
 ## 🧪 Demo Credentials
-Use the following to test login:
 
-- **Username:** `kminchelle`  
+### Option 1: DummyJSON Demo Login
+- **Username:** `kminchelle`
 - **Password:** `0lelplR`
+
+### Option 2: Signup
+You can create your own account using the Signup page.
+Signup users are stored locally in `localStorage` for demo purposes.
+
 
 ---
 
@@ -84,6 +92,8 @@ Use the following to test login:
 - **Routing:** React Router DOM
 - **Auth:** DummyJSON JWT Login
 - **Storage:** localStorage (session + bookings + wishlist)
+- **Auth:** DummyJSON JWT + localStorage-based signup demo
+
 
 ---
 

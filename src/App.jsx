@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import MainLayout from "./layout/MainLayout";
+import Signup from "./pages/Signup";
 
 import Home from "./pages/Home";
 import Hotels from "./pages/Hotels";
@@ -20,6 +21,7 @@ function App() {
         <Route path="/hotels/:id" element={<HotelDetails />} />
         <Route path="/login" element={<Login />} />
         <Route path="/favorites" element={<Favorites />} />
+        <Route path="/signup" element={<Signup />} />
 
         <Route
           path="/bookings"
