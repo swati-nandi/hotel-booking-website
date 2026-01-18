@@ -1,98 +1,97 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { useAuth } from "../context/AuthContext";
 
 function Login() {
-  const [username, setUsername] = useState("emilys");
-  const [password, setPassword] = useState("emilyspass");
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-
   const navigate = useNavigate();
   const { login } = useAuth();
 
-  const handleSubmit = async (e) => {
+  const [username, setUsername] = useState("kminchelle"); // DummyJSON test user
+  const [password, setPassword] = useState("0lelplR");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
-    setLoading(true);
+
+    if (!username.trim() || !password.trim()) {
+      setError("Please enter username and password.");
+      return;
+    }
 
     try {
-      const res = await axios.post(
-        "https://dummyjson.com/auth/login",
-        { username, password },
-        { headers: { "Content-Type": "application/json" } }
-      );
-
-      // save token + user info
-      login({
-        username: res.data.username,
-        token: res.data.token,
-        email: res.data.email,
-        image: res.data.image,
-      });
-
-      navigate("/");
+      setLoading(true);
+      await login(username, password);
+      navigate("/hotels");
     } catch (err) {
-      const message =
-        err?.response?.data?.message ||
-        err.message ||
-        "Login failed";
-      setError(message);
+      setError("Login failed. Please check your credentials.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white p-8 rounded-xl shadow-md w-full max-w-md"
-      >
-        <h2 className="text-2xl font-bold mb-2 text-center">Login</h2>
+    <div className="min-h-[85vh] flex items-center justify-center px-6">
+      <div className="w-full max-w-md bg-white text-gray-900 rounded-2xl shadow-xl border p-8">
+        <h1 className="text-3xl font-bold">Login</h1>
+        <p className="text-gray-500 mt-2">
+          Welcome back! Please login to continue.
+        </p>
 
         {error && (
-          <div className="bg-red-50 border border-red-200 text-red-600 text-sm px-4 py-3 rounded-lg mb-4">
+          <div className="mt-5 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl text-sm">
             {error}
           </div>
         )}
 
-        <label className="text-sm font-medium text-gray-700">Username</label>
-        <input
-          className="w-full mt-1 mb-4 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
+        <form onSubmit={handleLogin} className="mt-6 space-y-4">
+          <div>
+            <label className="text-sm font-medium text-gray-700">
+              Username
+            </label>
+            <input
+              type="text"
+              className="mt-1 w-full border p-3 rounded-xl outline-none text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </div>
 
-        <label className="text-sm font-medium text-gray-700">Password</label>
-        <input
-          type="password"
-          className="w-full mt-1 mb-6 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
+          <div>
+            <label className="text-sm font-medium text-gray-700">
+              Password
+            </label>
+            <input
+              type="password"
+              className="mt-1 w-full border p-3 rounded-xl outline-none text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
 
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition disabled:opacity-60"
-        >
-          {loading ? "Logging in..." : "Login"}
-        </button>
+          <button
+            disabled={loading}
+            className="w-full bg-blue-600 text-white font-semibold py-3 rounded-xl hover:bg-blue-700 transition disabled:opacity-70"
+          >
+            {loading ? "Logging in..." : "Login"}
+          </button>
+        </form>
 
-        <div className="text-xs text-gray-500 text-center mt-5">
-          <p className="font-semibold">Test Credentials</p>
-          <p>
-            Username: <b>emilys</b>
-          </p>
-          <p>
-            Password: <b>emilyspass</b>
-          </p>
+        <div className="mt-6 text-sm text-gray-500">
+          Demo credentials:
+          <div className="mt-2 bg-gray-100 rounded-xl p-3 text-gray-700">
+            <p>
+              <b>Username:</b> kminchelle
+            </p>
+            <p>
+              <b>Password:</b> 0lelplR
+            </p>
+          </div>
         </div>
-      </form>
+      </div>
     </div>
   );
 }
