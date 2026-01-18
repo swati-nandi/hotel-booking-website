@@ -1,16 +1,105 @@
-# React + Vite
+# StayEase 🏨✨  
+A fully responsive **Hotel Booking Website** built with **React + Vite + Tailwind CSS**.  
+Users can search, filter, view hotel details, add to wishlist, and book hotels with protected routes (JWT login).
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+---
 
-Currently, two official plugins are available:
+## 🌐 Live Demo
+👉 https://hotel-booking-website-umber.vercel.app
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 📌 Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### ✅ Authentication & Session
+- Login system using **JWT-based authentication (DummyJSON)**
+- Session persistence using **localStorage**
+- Protected routes:
+  - My Bookings
+  - Profile
+  - Wishlist/Favorites
 
-## Expanding the ESLint configuration
+### ✅ Hotels Search & Listings
+- Search hotels by **city / destination**
+- Responsive hotel listing cards
+- Grid / List layout toggle
+- Manual pagination using **Load More**
+- Skeleton loader UI while loading
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### ✅ Filtering & Sorting
+- Price range slider
+- Rating filter
+- Amenities filter:
+  - WiFi
+  - Pool
+  - Parking
+  - AC
+- Property type filter:
+  - Hotel
+  - Resort
+  - Apartment
+- Sorting:
+  - Popularity
+  - Rating
+  - Price Low → High
+  - Price High → Low
+
+### ✅ Hotel Details & Booking
+- Hotel details page with dynamic route
+- Booking form with:
+  - dates + guests input
+  - guest details
+  - price breakdown
+- Booking confirmation screen
+- Stores booking records locally
+
+### ✅ My Bookings
+- View all booking history
+- Cancel bookings
+- Upcoming/past bookings separation (if implemented)
+
+### ✅ Wishlist / Favorites (Brownie Points 🧁)
+- Add/remove hotels to wishlist
+- Favorites page to view saved hotels
+
+### ✅ UX Enhancements (Brownie Points 🧁)
+- Debounced search input
+- Lazy loading for images
+- Recently viewed hotels section
+- Mobile filters drawer panel (professional UI)
+
+---
+
+## 🧪 Demo Credentials
+Use the following to test login:
+
+- **Username:** `kminchelle`  
+- **Password:** `0lelplR`
+
+---
+
+## 🛠 Tech Stack
+- **Frontend:** React (Vite)
+- **Styling:** Tailwind CSS
+- **Routing:** React Router DOM
+- **Auth:** DummyJSON JWT Login
+- **Storage:** localStorage (session + bookings + wishlist)
+
+---
+
+## 📂 Folder Structure
+```bash
+src/
+ ├── components/        # Reusable UI components
+ ├── context/           # AuthContext / Providers
+ ├── data/              # Mock hotel data
+ ├── pages/             # Home, Hotels, Details, Login, Profile, Bookings etc.
+ ├── utils/             # helper utilities (recently viewed, wishlist etc.)
+ ├── App.jsx
+ ├── main.jsx
+
+### Screenshots
+![Home](public/screenshots/home.png)
+![Hotels](public/screenshots/hotels.png)
+![Hotel Details](public/screenshots/details.png)
+![Bookings](public/screenshots/bookings.png)
