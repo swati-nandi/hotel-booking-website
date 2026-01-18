@@ -23,7 +23,7 @@ function Login() {
     try {
       setLoading(true);
       await login(username, password);
-      navigate("/hotels");
+      navigate("/");
     } catch (err) {
       setError("Login failed. Please check your credentials.");
     } finally {
