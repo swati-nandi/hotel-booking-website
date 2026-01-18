@@ -5,13 +5,9 @@ function Profile() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
-  if (!user) {
-    return (
-      <div className="max-w-4xl mx-auto px-6 py-16">
-        <h1 className="text-2xl font-bold">You are not logged in</h1>
-      </div>
-    );
-  }
+  const username = user?.username || user?.email || "Guest";
+  const email = user?.email || "Not provided";
+  const id = user?.id || "—";
 
   const handleLogout = () => {
     logout();
@@ -19,63 +15,138 @@ function Profile() {
   };
 
   return (
-    <div className="max-w-5xl mx-auto px-6 py-10">
-      <h1 className="text-3xl font-bold mb-2">Profile</h1>
-      <p className="text-gray-500 dark:text-gray-400 mb-8">
-        Manage your account and view your information.
-      </p>
+    <div className="max-w-7xl mx-auto px-6 py-10 text-gray-100">
+      {/* Header */}
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-10">
+        <div>
+          <h1 className="text-4xl font-extrabold">Profile</h1>
+          <p className="text-gray-400 mt-2">
+            Manage your account preferences and view user information.
+          </p>
+        </div>
 
-      <div className="grid md:grid-cols-3 gap-6">
-        <div className="bg-white dark:bg-gray-900 p-6 rounded-xl shadow-sm border dark:border-gray-800 md:col-span-2">
-          <h2 className="text-xl font-bold mb-4">Account Details</h2>
+        <div className="flex gap-3 flex-wrap">
+          <button
+            onClick={() => navigate("/bookings")}
+            className="bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-blue-700 transition"
+          >
+            My Bookings
+          </button>
 
-          <div className="space-y-3 text-gray-700 dark:text-gray-200">
-            <p>
-              <span className="text-gray-500 dark:text-gray-400">
-                Username/Email:
-              </span>{" "}
-              <b>{user.username || user.email}</b>
-            </p>
-
-            {user.email && (
-              <p>
-                <span className="text-gray-500 dark:text-gray-400">Email:</span>{" "}
-                <b>{user.email}</b>
-              </p>
-            )}
-
-            <p className="text-sm text-gray-500 dark:text-gray-400">
-              (Session is stored in localStorage)
-            </p>
-          </div>
+          <button
+            onClick={() => navigate("/favorites")}
+            className="bg-white/10 border border-white/10 text-white px-6 py-3 rounded-xl font-semibold hover:bg-white/15 transition"
+          >
+            Wishlist
+          </button>
 
           <button
             onClick={handleLogout}
-            className="mt-6 bg-gray-900 text-white px-6 py-3 rounded-lg hover:bg-black transition"
+            className="bg-red-500/90 text-white px-6 py-3 rounded-xl font-semibold hover:bg-red-600 transition"
           >
             Logout
           </button>
         </div>
+      </div>
 
-        <div className="bg-white dark:bg-gray-900 p-6 rounded-xl shadow-sm border dark:border-gray-800">
-          <h2 className="text-xl font-bold mb-4">Session</h2>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
-            Token Preview:
-          </p>
+      {/* Profile Card */}
+      <div className="bg-gradient-to-br from-slate-900 to-slate-800 border border-white/10 rounded-3xl p-8 shadow-lg">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+          <div className="flex items-center gap-5">
+            {/* Avatar */}
+            <div className="h-16 w-16 rounded-2xl bg-blue-600 flex items-center justify-center text-2xl font-bold text-white shadow-md">
+              {username?.[0]?.toUpperCase()}
+            </div>
 
-          <div className="text-xs bg-gray-100 dark:bg-gray-800 p-3 rounded-lg break-words">
-            {user.token}
+            {/* Info */}
+            <div>
+              <h2 className="text-2xl font-bold text-white">{username}</h2>
+              <p className="text-gray-300">{email}</p>
+
+              <div className="mt-2 inline-flex items-center gap-2 text-xs px-3 py-1 rounded-full bg-white/10 border border-white/10 text-gray-200">
+                ✨ Premium Demo User
+              </div>
+            </div>
+          </div>
+
+          {/* Stats */}
+          <div className="grid grid-cols-2 gap-4 w-full md:w-auto">
+            <div className="bg-white/5 border border-white/10 rounded-2xl p-4">
+              <p className="text-xs text-gray-400">User ID</p>
+              <p className="font-bold text-white mt-1">{id}</p>
+            </div>
+
+            <div className="bg-white/5 border border-white/10 rounded-2xl p-4">
+              <p className="text-xs text-gray-400">Account Status</p>
+              <p className="font-bold text-green-400 mt-1">Active</p>
+            </div>
+
+            <div className="bg-white/5 border border-white/10 rounded-2xl p-4">
+              <p className="text-xs text-gray-400">Session Storage</p>
+              <p className="font-bold text-white mt-1">localStorage</p>
+            </div>
+
+            <div className="bg-white/5 border border-white/10 rounded-2xl p-4">
+              <p className="text-xs text-gray-400">Security</p>
+              <p className="font-bold text-white mt-1">JWT</p>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="mt-10 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-900 rounded-xl p-6">
-        <h3 className="text-lg font-bold text-blue-700 dark:text-blue-300">
-          Coming Soon ✨
-        </h3>
-        <p className="text-blue-700 dark:text-blue-200 mt-2 text-sm">
-          Download booking PDFs, custom themes and more features.
-        </p>
+      {/* Extra Section */}
+      <div className="mt-8 grid md:grid-cols-2 gap-6">
+        {/* Account Details */}
+        <div className="bg-slate-900/60 border border-white/10 rounded-3xl p-6 shadow-sm">
+          <h3 className="text-xl font-bold text-white mb-4">Account Details</h3>
+
+          <div className="space-y-3 text-sm">
+            <div className="flex justify-between text-gray-300">
+              <span className="text-gray-400">Username</span>
+              <span className="font-medium">{user?.username || "—"}</span>
+            </div>
+
+            <div className="flex justify-between text-gray-300">
+              <span className="text-gray-400">Email</span>
+              <span className="font-medium">{user?.email || "—"}</span>
+            </div>
+
+            <div className="flex justify-between text-gray-300">
+              <span className="text-gray-400">Login System</span>
+              <span className="font-medium">DummyJSON (JWT)</span>
+            </div>
+
+            <div className="flex justify-between text-gray-300">
+              <span className="text-gray-400">Protected Routes</span>
+              <span className="font-medium">Enabled</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Coming Soon */}
+        <div className="bg-gradient-to-br from-blue-900/40 to-indigo-900/30 border border-white/10 rounded-3xl p-6 shadow-sm">
+          <h3 className="text-xl font-bold text-white mb-3">Coming Soon ✨</h3>
+          <p className="text-gray-200 text-sm leading-relaxed">
+            Download booking PDFs, account personalization, loyalty rewards,
+            custom preferences, and theme switching.
+          </p>
+
+          <div className="mt-5 flex flex-wrap gap-2">
+            {[
+              "PDF Invoice",
+              "Loyalty Points",
+              "Saved Guests",
+              "Travel Preferences",
+            ].map((tag) => (
+              <span
+                key={tag}
+                className="text-xs px-3 py-1 rounded-full bg-white/10 border border-white/10 text-gray-100"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
